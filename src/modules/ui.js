@@ -1,3 +1,7 @@
+import catchIcon from '@/assets/icons/pokeball.png';
+import deleteIcon from '@/assets/icons/delete.png';
+import notesIcon from '@/assets/icons/notes.png';
+
 const pfxCatch = 'catch-';
 const pfxDelete = 'delete-';
 const pfxNotes = 'notes-';
@@ -15,13 +19,13 @@ export function createCard(pokemon, isStored = false) {
         <article id="${pfxArticle}${pokemon.id}" class="flex flex-col bg-poke-gray-dark text-stone-100 rounded-xl shadow">
           <div class="flex justify-end">
             <button id="${pfxNotes}${pokemon.id}" class="w-7 mt-1 me-1 hover:cursor-pointer hover:outline-2 rounded-md flex justify-center" hidden>
-              <img class="rounded-md" src="./src/assets/icons/notes.png">
+              <img class="rounded-md" src="${notesIcon}">
             </button>
             <button id="${pfxDelete}${pokemon.id}" class="w-7 mt-1 me-1 hover:cursor-pointer hover:outline-2 rounded-full flex justify-center" ${deleteBtnVisibility}>
-              <img class="bg-white rounded-full" src="./src/assets/icons/delete.png">
+              <img class="bg-white rounded-full" src="${deleteIcon}">
             </button>
             <button id="${pfxCatch}${pokemon.id}" class="w-7 mt-1 me-1 hover:cursor-pointer hover:outline-2 rounded-full flex justify-center hover:animate-spin" ${catchBtnVisibility}>
-              <img src="./src/assets/icons/pokeball.png">
+              <img src="${catchIcon}">
             </button>
           </div>
           <div class="flex md:flex-col gap-2 h-full">
