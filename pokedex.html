@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favourites</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="./src/pokedex.js"></script>
+    <style type="text/tailwindcss">
+      @layer base {
+        @font-face {
+          font-family: 'icons';
+          src: url('./src/assets/font/fontello.eot?14379061');
+          src: url('./src/assets/font/fontello.eot?14379061#iefix')
+              format('embedded-opentype'),
+            url('./src/assets/font/fontello.woff?14379061') format('woff'),
+            url('./src/assets/font/fontello.ttf?14379061') format('truetype'),
+            url('./src/assets/font/fontello.svg?14379061#fontello')
+              format('svg');
+          font-style: normal;
+          font-weight: normal;
+        }
+      }
+      @theme {
+        --color-poke-blue: #3b82f6;
+        --color-poke-red: #ef3e36;
+        --color-poke-green: #4ade80;
+        --color-poke-yellow: #ffd447;
+        --color-poke-gray-dark: #1e293b;
+        --color-poke-gray-light: #f3f4f6;
+        --font-icons: 'icons';
+      }
+      @layer components {
+        .icon {
+          @apply normal-case not-italic antialiased text-[125%] text-poke-gray-dark;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-poke-gray-light min-h-screen flex flex-col">
+    <div
+      id="wrapper"
+      class="max-w-[1440px] w-full mx-auto flex flex-col min-h-screen select-none bg-[url('./src/assets/images/bg-image-1.webp')] bg-fixed"
+    >
+      <header
+        class="flex flex-col md:flex-row items-center w-full bg-poke-gray-dark p-5 text-poke-gray-light mb-10 sticky top-0 shadow-[0_25px_25px_rgba(255,255,255,0.25)] z-100"
+      >
+        <div
+          class="w-full md:w-1/4 flex items-center justify-between md:justify-start"
+        >
+          <a href="index.html" class="flex items-center hover:text-poke-red">
+            <img
+              src="assets/icons/pokeball.png"
+              width="24"
+              height="24"
+              alt=""
+              class="block w-[24px] h-[24px] mr-2"
+            />
+            <span class="text-2xl">PokedexDiary</span>
+          </a>
+          <div id="toggle-menu" class="md:hidden">
+            <i id="menu-o" class="icon font-icons text-white">&#xf0c9;</i>
+            <i id="menu-c" class="icon font-icons text-white hidden"
+              >&#xe801;</i
+            >
+          </div>
+        </div>
+        <div
+          id="search-container"
+          class="w-full md:3/4 hidden mt-5 md:mt-0 md:flex md:justify-end"
+        >
+          <div class="flex items-center justify-between">
+            <form method="get" class="flex items-center mr-5 md:mr-10">
+              <div class="flex items-center relative mr-2 md:mr-5">
+                <label for="search" class="sr-only">Search</label>
+                <input
+                  id="search"
+                  name="search"
+                  type="text"
+                  placeholder="Search by name..."
+                  class="w-[150px] md:w-[200px] bg-white px-2 py-1 text-black placeholder-slate-500 placeholder:italic outline-none focus:ring-2 focus:ring-poke-red focus:ring-offset-2 rounded"
+                />
+                <i
+                  class="icon font-icons text-poke-gray-dark absolute left-[85%]"
+                  >&#xe804;</i
+                >
+              </div>
+            </form>
+            <a
+              href="./index.html"
+              class="w-[120px] group flex justify-center items-center hover:text-slate-300"
+              ><i
+                class="icon font-icons text-white mr-2 transition-transform ease-linear group-hover:scale-120"
+                >&#xf0ca;</i
+              >
+              List</a
+            >
+          </div>
+        </div>
+      </header>
+
+      <main class="flex-grow">
+        <div
+          id="pokemon-container"
+          class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 p-2 px-5 pb-10 md:p-5"
+        >
+          <!-- Pokémon cards will be populated here -->
+        </div>
+      </main>
+
+      <aside
+        id="dialog-container"
+        class="hidden bg-[rgba(255,255,255,0.5)] absolute top-0 left-0 w-full h-full z-100 flex justify-center items-center fixed"
+      >
+        <dialog
+          open
+          class="m-auto w-[90%] h-[70%] md:w-[60%] max-w-[1200px] p-6 rounded shadow-xl bg-white border-3 border-poke-gray-light"
+        >
+          <form
+            id="note-form"
+            class="flex flex-col gap-4 justify-between h-full"
+          >
+            <div class="flex justify-between">
+              <label
+                for="note-text"
+                class="text-xl lg:text-2xl font-semibold text-gray-700"
+              >
+                Notes for
+                <span id="note-name" class="capitalize font-mono"
+                  >PLATZHALTER</span
+                >
+              </label>
+              <i
+                id="btn-close-note"
+                class="icon font-icons text-white bg-poke-red rounded-full px-2 cursor-pointer"
+                >&#xe801;</i
+              >
+            </div>
+
+            <textarea
+              id="note-area"
+              name="note-text"
+              class="w-full h-full p-3 rounded bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300 resize-none placeholder:italic"
+              placeholder="Your notes here..."
+            ></textarea>
+
+            <button
+              id="btn-save-note"
+              class="self-end bg-poke-green text-black w-full px-6 py-2 rounded-lg cursor-pointer"
+            >
+              Save
+            </button>
+          </form>
+        </dialog>
+      </aside>
+
+      <footer class="bg-poke-gray-dark h-15 w-full p-5">
+        <div
+          id="footer-container"
+          class="w-full flex justify-between lg:justify-around items-center text-poke-gray-light text-xs md:text-sm"
+        >
+          <div id="footer-left" class="hidden md:block"></div>
+          <div id="footer-center">PokeDexDiary © 2025 Anna, Simone, Dandy</div>
+          <div id="footer-right">
+            <a href="https://pokeapi.co/" target="_blank" rel="noopener">
+              PokeAPI
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
