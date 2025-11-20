@@ -60,6 +60,11 @@ menuClose.addEventListener('click', (e) => {
   toggleMenu(e);
 });
 
+/**
+ * Fetches a pokemon from the Pokedex API
+ * @param {Number} id
+ * @returns
+ */
 function fetchPokemon(id) {
   return fetch(`${URL}${id}`).then((res) => {
     if (!res.ok) throw new Error('res.ok = false');
@@ -68,6 +73,11 @@ function fetchPokemon(id) {
 }
 
 /* SCHEDULE ===============================*/
+
+/**
+ * Creates Grid of pokemon cards
+ * @param {Array} pokeArr
+ */
 function createGrid(pokeArr) {
   pokeArr.forEach((data) => {
     const pokemon = new Pokemon(data);
@@ -89,10 +99,9 @@ async function catchBtnClicked(e) {
   const pokeId = pokeIdFromEvent(e);
   catchBtnFromPokeId(pokeId).hidden = true;
   deleteBtnFromPokeId(pokeId).hidden = false;
-  fetchPokemon(pokeId).then((pokemonData) => {
-    storePokemon(pokemonData);
-    setFavouriteIconColor();
-  });
+  const pokemonData = pokeArr.find((pokemon) => pokemon.id === pokeId);
+  storePokemon(pokemonData);
+  setFavouriteIconColor();
 }
 
 function setFavouriteIconColor() {
