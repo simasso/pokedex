@@ -11,6 +11,11 @@ export const menuClose = document.querySelector('#menu-c');
 export const searchInput = document.querySelector('#search');
 export const searchContainer = document.querySelector('#search-container');
 
+/**
+ * Creates a card to be displayed in pokemons grid on main page or favourites page
+ * @param {Pokemon} pokemon Obeject of pokemon data to be displayed
+ * @param {boolean} isStored tells if pokemon exists in storage
+ */
 export function createCard(pokemon, isStored = false) {
   const catchBtnVisibility = isStored ? 'hidden' : '';
   const deleteBtnVisibility = isStored ? '' : 'hidden';
@@ -51,18 +56,34 @@ export function createCard(pokemon, isStored = false) {
   pokeContainer.insertAdjacentHTML('beforeend', html);
 }
 
+/**
+ * @param {Number} pokeId ID of pokemon
+ * @returns catch button element from card with given pokemon ID
+ */
 export function catchBtnFromPokeId(pokeId) {
   return btnFromPokeId(pokeId, pfxCatch);
 }
 
+/**
+ * @param {Number} pokeId ID of pokemon
+ * @returns delete button element from card with given pokemon ID
+ */
 export function deleteBtnFromPokeId(pokeId) {
   return btnFromPokeId(pokeId, pfxDelete);
 }
 
+/**
+ * @param {Number} pokeId ID of pokemon
+ * @returns notes button element from card with given pokemon ID
+ */
 export function notesBtnFromPokeId(pokeId) {
   return btnFromPokeId(pokeId, pfxNotes);
 }
 
+/**
+ * @param {Number} pokeId ID of pokemon
+ * @returns article element from card with given pokemon ID
+ */
 export function articleFromPokeId(pokeId) {
   return btnFromPokeId(pokeId, pfxArticle);
 }
@@ -71,6 +92,11 @@ function btnFromPokeId(pokeId, prefix) {
   return document.querySelector(`#${prefix}${pokeId}`);
 }
 
+/**
+ * Extracts pokemon ID of card on which the click event happened
+ * @param {Event} e click event
+ * @returns extracted ID
+ */
 export function pokeIdFromEvent(e) {
   const element = e.target.closest('button') ?? e.target.closest('article');
   return Number(element.id.split('-').pop());
