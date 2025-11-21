@@ -9,7 +9,7 @@ const pfxArticle = 'article-';
 export const menuOpen = document.querySelector('#menu-o');
 export const menuClose = document.querySelector('#menu-c');
 export const searchInput = document.querySelector('#search');
-export const searchContainer = document.querySelector('#search-container');
+export const searchContainer = document.querySelector('#container-right');
 
 /**
  * Creates a card to be displayed in pokemons grid on main page or favourites page
@@ -102,6 +102,15 @@ export function pokeIdFromEvent(e) {
   return Number(element.id.split('-').pop());
 }
 
+/**
+ * Filters the cards based on a search query and displays the results.
+ *
+ * This function is triggered when the user types in the search input. It filters the `cardArray`
+ * based on the query and shows only the matching cards. If no matches are found, an error message is displayed.
+ *
+ * @param {Event} e - The event object triggered by user input in the search field.
+ * @param {Array} cardArray - An array of objects representing the cards to be searched through.
+ */
 export function getSearchResults(e, cardArray) {
   let errorContainer = document.querySelector('.error');
   const query = searchInput.value.toLowerCase();
@@ -144,6 +153,15 @@ export function getSearchResults(e, cardArray) {
   }
 }
 
+/**
+ * Toggles the visibility of the menu and search container based on the clicked element.
+ *
+ * This function is used to toggle the visibility of the menu and search container. When a user clicks on a
+ * menu button (either `menu-c` or `menu-o`), the function toggles the visibility of the menu (open/close)
+ * and shows or hides the search container accordingly.
+ *
+ * @param {Event} e - The event object triggered when a menu button is clicked.
+ */
 export function toggleMenu(e) {
   menuOpen.classList.toggle('hidden');
   menuClose.classList.toggle('hidden');
