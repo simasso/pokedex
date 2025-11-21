@@ -15,7 +15,7 @@ import { loadStorage, writeStorage, deletePokemon } from './modules/storage.js';
 const note = document.querySelector('#dialog-container');
 const noteName = document.querySelector('#note-name');
 const btnCloseNote = document.querySelector('#btn-close-note');
-const noteArea = document.querySelector('#note-area');
+const noteArea = document.querySelector('#note-text');
 const btnSaveNote = document.querySelector('#btn-save-note');
 
 showFavourites();
