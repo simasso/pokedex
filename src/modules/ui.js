@@ -110,7 +110,6 @@ export function pokeIdFromEvent(e) {
  *
  * @param {Event} e - The event object triggered by user input in the search field.
  * @param {Array} cardArray - An array of objects representing the cards to be searched through.
- * @returns {void} - The function doesn't return anything but directly manipulates the DOM.
  */
 export function getSearchResults(e, cardArray) {
   let errorContainer = document.querySelector('.error');
@@ -162,7 +161,6 @@ export function getSearchResults(e, cardArray) {
  * and shows or hides the search container accordingly.
  *
  * @param {Event} e - The event object triggered when a menu button is clicked.
- * @returns {void} - The function doesn't return anything but directly manipulates the DOM.
  */
 export function toggleMenu(e) {
   menuOpen.classList.toggle('hidden');
